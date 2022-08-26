@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+  objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+  <changeSet id="1661510797311-1" author="Ivan (generated)">
+    <createTable tableName="countries">
+      <column name="country_id" type="CHAR(2)">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="country_name" type="VARCHAR(40)"/>
+      <column name="region_id" type="INT">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet id="1661510797311-2" author="Ivan (generated)">
+    <createTable tableName="departments">
+      <column autoIncrement="true" name="department_id" type="INT">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="department_name" type="VARCHAR(30)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="location_id" type="INT"/>
+    </createTable>
+  </changeSet>
+  <changeSet id="1661510797311-3" author="Ivan (generated)">
+    <createTable tableName="dependents">
+      <column autoIncrement="true" name="dependent_id" type="INT">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="first_name" type="VARCHAR(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="last_name" type="VARCHAR(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="relationship" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="employee_id" type="INT">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet id="1661510797311-4" author="Ivan (generated)">
+    <createTable tableName="employees">
+      <column autoIncrement="true" name="employee_id" type="INT">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="first_name" type="VARCHAR(20)"/>
+      <column name="last_name" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="email" type="VARCHAR(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="phone_number" type="VARCHAR(20)"/>
+      <column name="hire_date" type="date">
+        <constraints nullable="false"/>
+      </column>
+      <column name="job_id" type="INT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="salary" type="DECIMAL(8, 2)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="manager_id" type="INT"/>
+      <column name="department_id" type="INT"/>
+    </createTable>
+  </changeSet>
+  <changeSet id="1661510797311-5" author="Ivan (generated)">
+    <createTable tableName="jobs">
+      <column autoIncrement="true" name="job_id" type="INT">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="job_title" type="VARCHAR(35)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="min_salary" type="DECIMAL(8, 2)"/>
+      <column name="max_salary" type="DECIMAL(8, 2)"/>
+    </createTable>
+  </changeSet>
+  <changeSet id="1661510797311-6" author="Ivan (generated)">
+    <createTable tableName="locations">
+      <column autoIncrement="true" name="location_id" type="INT">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="street_address" type="VARCHAR(40)"/>
+      <column name="postal_code" type="VARCHAR(12)"/>
+      <column name="city" type="VARCHAR(30)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="state_province" type="VARCHAR(25)"/>
+      <column name="country_id" type="CHAR(2)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet id="1661510797311-7" author="Ivan (generated)">
+    <createTable tableName="regions">
+      <column autoIncrement="true" name="region_id" type="INT">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="region_name" type="VARCHAR(25)"/>
+    </createTable>
+  </changeSet>
+  <changeSet id="1661510797311-8" author="Ivan (generated)">
+    <createIndex indexName="country_id" tableName="locations">
+      <column name="country_id"/>
+    </createIndex>
+  </changeSet>
+  <changeSet id="1661510797311-9" author="Ivan (generated)">
+    <createIndex indexName="department_id" tableName="employees">
+      <column name="department_id"/>
+    </createIndex>
+  </changeSet>
+  <changeSet id="1661510797311-10" author="Ivan (generated)">
+    <createIndex indexName="employee_id" tableName="dependents">
+      <column name="employee_id"/>
+    </createIndex>
+  </changeSet>
+  <changeSet id="1661510797311-11" author="Ivan (generated)">
+    <createIndex indexName="job_id" tableName="employees">
+      <column name="job_id"/>
+    </createIndex>
+  </changeSet>
+  <changeSet id="1661510797311-12" author="Ivan (generated)">
+    <createIndex indexName="location_id" tableName="departments">
+      <column name="location_id"/>
+    </createIndex>
+  </changeSet>
+  <changeSet id="1661510797311-13" author="Ivan (generated)">
+    <createIndex indexName="manager_id" tableName="employees">
+      <column name="manager_id"/>
+    </createIndex>
+  </changeSet>
+  <changeSet id="1661510797311-14" author="Ivan (generated)">
+    <createIndex indexName="region_id" tableName="countries">
+      <column name="region_id"/>
+    </createIndex>
+  </changeSet>
+  <changeSet id="1661510797311-15" author="Ivan (generated)">
+    <addForeignKeyConstraint baseColumnNames="region_id" baseTableName="countries"
+      constraintName="countries_ibfk_1" onDelete="CASCADE" onUpdate="CASCADE"
+      referencedColumnNames="region_id" referencedTableName="regions"/>
+  </changeSet>
+  <changeSet id="1661510797311-16" author="Ivan (generated)">
+    <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="departments"
+      constraintName="departments_ibfk_1" onDelete="CASCADE" onUpdate="CASCADE"
+      referencedColumnNames="location_id" referencedTableName="locations"/>
+  </changeSet>
+  <changeSet id="1661510797311-17" author="Ivan (generated)">
+    <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="dependents"
+      constraintName="dependents_ibfk_1" onDelete="CASCADE" onUpdate="CASCADE"
+      referencedColumnNames="employee_id" referencedTableName="employees"/>
+  </changeSet>
+  <changeSet id="1661510797311-18" author="Ivan (generated)">
+    <addForeignKeyConstraint baseColumnNames="job_id" baseTableName="employees"
+      constraintName="employees_ibfk_1" onDelete="CASCADE" onUpdate="CASCADE"
+      referencedColumnNames="job_id" referencedTableName="jobs"/>
+  </changeSet>
+  <changeSet id="1661510797311-19" author="Ivan (generated)">
+    <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="employees"
+      constraintName="employees_ibfk_2" onDelete="CASCADE" onUpdate="CASCADE"
+      referencedColumnNames="department_id" referencedTableName="departments"/>
+  </changeSet>
+  <changeSet id="1661510797311-20" author="Ivan (generated)">
+    <addForeignKeyConstraint baseColumnNames="manager_id" baseTableName="employees"
+      constraintName="employees_ibfk_3" onDelete="RESTRICT" onUpdate="RESTRICT"
+      referencedColumnNames="employee_id" referencedTableName="employees"/>
+  </changeSet>
+  <changeSet id="1661510797311-21" author="Ivan (generated)">
+    <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="locations"
+      constraintName="locations_ibfk_1" onDelete="CASCADE" onUpdate="CASCADE"
+      referencedColumnNames="country_id" referencedTableName="countries"/>
+  </changeSet>
+
+</databaseChangeLog>

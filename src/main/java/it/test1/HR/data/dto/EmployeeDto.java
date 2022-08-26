@@ -27,13 +27,13 @@ public class EmployeeDto implements Dto {
   private LocalDate hireDate;
   private JobDto job;
   private BigDecimal salary;
-  private Employee manager;
   private DepartmentDto department;
-  private Set<Employee> employees = new LinkedHashSet<>();
+
 
   @Override
   public Employee toModel() {
-    return Employee.builder().id(id).firstName(firstName).lastName(lastName).email(email).phoneNumber(phoneNumber).hireDate(hireDate).job(job.toModel())
-        .salary(salary).manager(manager).department(department.toModel()).employees(toModel().getEmployees()).build();
+    return Employee.builder().id(id).firstName(firstName)
+        .lastName(lastName).email(email).phoneNumber(phoneNumber).hireDate(hireDate)
+        .job(job.toModel()).salary(salary).department(department.toModel()).build();
   }
 }

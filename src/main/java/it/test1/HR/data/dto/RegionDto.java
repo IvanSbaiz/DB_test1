@@ -19,10 +19,10 @@ public class RegionDto implements Dto {
 
   private Integer id;
   private String regionName;
-  private Set<CountryDto> countries = new LinkedHashSet<>();
+
 
   @Override
   public Region toModel() {
-    return Region.builder().id(id).regionName(regionName).countries(toModel().getCountries()).build();
+    return Region.builder().id(id).regionName(regionName).build();
   }
 }

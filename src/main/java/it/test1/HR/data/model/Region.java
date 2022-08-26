@@ -29,10 +29,10 @@ public class Region implements Model {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "regionId", nullable = false)
+  @Column(name = "region_id", nullable = false)
   private Integer id;
 
-  @Column(name = "regionName", length = 25)
+  @Column(name = "region_name", length = 25)
   private String regionName;
 
   @OneToMany(mappedBy = "region")
@@ -40,6 +40,6 @@ public class Region implements Model {
 
   @Override
   public RegionDto toDto() {
-    return RegionDto.builder().id(id).regionName(regionName).countries(toDto().getCountries()).build();
+    return RegionDto.builder().id(id).regionName(regionName).build();
   }
 }

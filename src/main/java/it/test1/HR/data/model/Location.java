@@ -1,6 +1,5 @@
 package it.test1.HR.data.model;
 
-import it.test1.HR.data.archetype.Dto;
 import it.test1.HR.data.archetype.Model;
 import it.test1.HR.data.dto.LocationDto;
 import java.util.LinkedHashSet;
@@ -18,9 +17,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -34,24 +31,24 @@ public class Location implements Model {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "locationId", nullable = false)
+  @Column(name = "location_id", nullable = false)
   private Integer id;
 
-  @Column(name = "streetAddress", length = 40)
+  @Column(name = "street_address", length = 40)
   private String streetAddress;
 
-  @Column(name = "postalCode", length = 12)
+  @Column(name = "postal_code", length = 12)
   private String postalCode;
 
   @Column(name = "city", nullable = false, length = 30)
   private String city;
 
-  @Column(name = "stateProvince", length = 25)
+  @Column(name = "state_province", length = 25)
   private String stateProvince;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "countryId", nullable = false)
+  @JoinColumn(name = "country_id", nullable = false)
   private Country country;
 
   @OneToMany(mappedBy = "location")
@@ -59,7 +56,7 @@ public class Location implements Model {
 
   @Override
   public LocationDto toDto() {
-    return LocationDto.builder().id(id).streetAddress(streetAddress).postalCode(postalCode).city(city).stateProvince(stateProvince).country(country.toDto())
-        .departments(toDto().getDepartments()).build();
+    return LocationDto.builder().id(id).streetAddress(streetAddress).postalCode(postalCode)
+        .city(city).stateProvince(stateProvince).country(country.toDto()).build();
   }
 }

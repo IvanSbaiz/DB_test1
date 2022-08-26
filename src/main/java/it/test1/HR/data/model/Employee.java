@@ -36,47 +36,51 @@ public class Employee implements Model {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "employeeId", nullable = false)
+  @Column(name = "employee_id", nullable = false)
   private Integer id;
 
-  @Column(name = "firstName", length = 20)
+  @Column(name = "first_name", length = 20)
   private String firstName;
 
-  @Column(name = "lastName", nullable = false, length = 25)
+  @Column(name = "last_name", nullable = false, length = 25)
   private String lastName;
 
   @Column(name = "email", nullable = false, length = 100)
   private String email;
 
-  @Column(name = "phoneNumber", length = 20)
+  @Column(name = "phone_number", length = 20)
   private String phoneNumber;
 
-  @Column(name = "hireDate", nullable = false)
+  @Column(name = "hire_date", nullable = false)
   private LocalDate hireDate;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "jobId", nullable = false)
+  @JoinColumn(name = "job_id", nullable = false)
   private Job job;
 
   @Column(name = "salary", nullable = false, precision = 8, scale = 2)
   private BigDecimal salary;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "managerId")
+  @JoinColumn(name = "manager_id")
   private Employee manager;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "departmentId")
+  @JoinColumn(name = "department_id")
   private Department department;
 
   @OneToMany(mappedBy = "manager")
   private Set<Employee> employees = new LinkedHashSet<>();
 
+  @OneToMany(mappedBy = "employee")
+  private Set<Dependent> dependents = new LinkedHashSet<>();
+
   @Override
   public EmployeeDto toDto() {
-    return EmployeeDto.builder().id(id).firstName(firstName).lastName(lastName).email(email).phoneNumber(phoneNumber).hireDate(hireDate)
-        .job(job.toDto()).salary(salary).manager(manager).department(department.toDto()).employees(toDto().getEmployees()).build();
+    return EmployeeDto.builder().id(id).firstName(firstName).lastName(lastName).email(email)
+        .phoneNumber(phoneNumber).hireDate(hireDate).job(job.toDto()).salary(salary)
+        .department(department.toDto()).build();
   }
 }

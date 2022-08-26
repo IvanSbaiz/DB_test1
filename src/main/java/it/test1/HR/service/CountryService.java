@@ -10,6 +10,8 @@ public interface CountryService {
 
   public List<Country> getAll();
 
+  //public Country save(Country country);
+
   public GenericResponse insert(Country country);
 
   public GenericResponse update(Country country);

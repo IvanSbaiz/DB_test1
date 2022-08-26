@@ -30,16 +30,16 @@ public class Job implements Model {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "jobId", nullable = false)
+  @Column(name = "job_id", nullable = false)
   private Integer id;
 
-  @Column(name = "jobTitle", nullable = false, length = 35)
+  @Column(name = "job_title", nullable = false, length = 35)
   private String jobTitle;
 
-  @Column(name = "minSalary", precision = 8, scale = 2)
+  @Column(name = "min_salary", precision = 8, scale = 2)
   private BigDecimal minSalary;
 
-  @Column(name = "maxSalary", precision = 8, scale = 2)
+  @Column(name = "max_salary", precision = 8, scale = 2)
   private BigDecimal maxSalary;
 
   @OneToMany(mappedBy = "job")
@@ -47,6 +47,6 @@ public class Job implements Model {
 
   @Override
   public JobDto toDto() {
-    return JobDto.builder().id(id).jobTitle(jobTitle).minSalary(minSalary).maxSalary(maxSalary).employees(toDto().getEmployees()).build();
+    return JobDto.builder().id(id).jobTitle(jobTitle).minSalary(minSalary).maxSalary(maxSalary).build();
   }
 }

@@ -1,6 +1,5 @@
 package it.test1.HR.service.impl;
 
-import it.test1.HR.data.dto.LocationDto;
 import it.test1.HR.data.model.Country;
 import it.test1.HR.data.model.Location;
 import it.test1.HR.data.model.Region;
@@ -43,45 +42,54 @@ public class CountryImpl implements CountryService {
     return countryRepository.findAll();
   }
 
+  /* @Override
+  public Country save(Country country) {
+    return countryRepository.save(country);
+  } */
+
+
+
 
   @Override
   public GenericResponse insert(Country country) {
 
     GenericResponse response = new GenericResponse();
 
-  /*  Optional<Location> location = locationRepository.findById(
-        country.getLocations().toArray().length);
-    if (location.isPresent()) {
+    Optional<Region> region = regionRepository.findById(country.getRegion().getId());
+    if (region.isPresent()) {
 
-      country.setLocations((Set<Location>) location.get()); */
+      country.setRegion(region.get());
 
-      Optional<Region> region = regionRepository.findById(country.getRegion().getId());
-      if (region.isPresent()) {
+      Country countrySaved = countryRepository.save(country);
+      response.setBody(countrySaved.toDto());
+      response.setStatusCode(HttpStatus.CREATED);
+      response.setMessage("Country inserted");
 
-        country.setRegion(region.get());
-
-        Country countrySaved = countryRepository.save(country);
-        response.setBody(countrySaved.toDto());
-        response.setStatusCode(HttpStatus.CREATED);
-        response.setMessage("Country inserted");
-
-      } else {
-        response.setStatusCode(HttpStatus.NOT_FOUND);
-        response.setMessage("Region not found");
-
-      }
-
-    /*} else {
+    } else {
       response.setStatusCode(HttpStatus.NOT_FOUND);
-      response.setMessage("Region not found"); */
+      response.setMessage("Region not found");
 
+    }
 
     return response;
   }
 
   @Override
   public GenericResponse update(Country country) {
-    return null;
+
+    GenericResponse response = new GenericResponse();
+
+    if (countryRepository.findById(country.getId()).isPresent()) {
+
+      response.setStatusCode(HttpStatus.OK);
+      response.setMessage("Country updated");
+
+    } else {
+      response.setStatusCode(HttpStatus.NOT_FOUND);
+      response.setMessage("Error update. Country not found");
+    }
+
+    return response;
   }
 
   @Override

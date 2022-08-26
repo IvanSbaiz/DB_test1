@@ -2,12 +2,15 @@ package it.test1.HR.controller;
 
 import it.test1.HR.data.dto.CountryDto;
 import it.test1.HR.data.model.Country;
+import it.test1.HR.data.request.country.CountryInsertRequest;
+import it.test1.HR.data.response.GenericResponse;
 import it.test1.HR.service.CountryService;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,12 +33,16 @@ public class CountryController {
 
   }
 
-  @GetMapping("/{idCountries}")
-  public Country get(@PathVariable String idCountries) {
-    return countryService.getById(idCountries);
+  @GetMapping("/{id}")
+  public Country get(@PathVariable String idCountry) {
+    return countryService.getById(idCountry);
 
   }
 
+  @PostMapping
+  public GenericResponse insert(@RequestBody CountryInsertRequest request) {
+    return countryService.insert(request.toCountries());
+  }
 
 }
 

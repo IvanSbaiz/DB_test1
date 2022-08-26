@@ -34,15 +34,15 @@ public class Country implements Model {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "countryId", nullable = false, length = 2)
+  @Column(name = "country_id", nullable = false, length = 2)
   private String id;
 
-  @Column(name = "countryName", length = 40)
+  @Column(name = "country_name", length = 40)
   private String countryName;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "regionId", nullable = false)
+  @JoinColumn(name = "region_id", nullable = false)
   private Region region;
 
   @OneToMany(mappedBy = "country")
@@ -50,7 +50,6 @@ public class Country implements Model {
 
   @Override
   public CountryDto toDto() {
-    return CountryDto.builder().id(id).countryName(countryName).region(region.toDto()).locations(
-        toDto().getLocations()).build();
+    return CountryDto.builder().id(id).countryName(countryName).region(region.toDto()).build();
   }
 }

@@ -1,7 +1,6 @@
 package it.test1.HR.repository;
 
 import it.test1.HR.data.model.Country;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

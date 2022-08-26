@@ -2,9 +2,7 @@ package it.test1.HR.data.model;
 
 import it.test1.HR.data.archetype.Dto;
 import it.test1.HR.data.archetype.Model;
-import it.test1.HR.data.dto.DepartmentDto;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import it.test1.HR.data.dto.DependentDto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,27 +26,30 @@ import org.hibernate.annotations.OnDeleteAction;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "departments")
-public class Department implements Model {
+@Table(name = "dependents")
+public class Dependent implements Model {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "department_id", nullable = false)
+  @Column(name = "dependent_id", nullable = false)
   private Integer id;
 
-  @Column(name = "department_name", nullable = false, length = 30)
-  private String departmentName;
+  @Column(name = "first_name", nullable = false, length = 50)
+  private String firstName;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @Column(name = "last_name", nullable = false, length = 50)
+  private String lastName;
+
+  @Column(name = "relationship", nullable = false, length = 25)
+  private String relationship;
+
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
-  @JoinColumn(name = "location_id")
-  private Location location;
-
-  @OneToMany(mappedBy = "department")
-  private Set<Employee> employees = new LinkedHashSet<>();
+  @JoinColumn(name = "employee_id", nullable = false)
+  private Employee employee;
 
   @Override
-  public DepartmentDto toDto() {
-    return DepartmentDto.builder().id(id).departmentName(departmentName).location(location.toDto()).build();
+  public DependentDto toDto() {
+    return DependentDto.builder().id(id).firstName(firstName).lastName(lastName).relationship(relationship).employee(employee.toDto()).build();
   }
 }
