@@ -16,7 +16,7 @@ public class CountryInsertRequest {
 
   private String id;
   private String countryName;
-  private Integer idRegion;
+  private int idRegion;
 
   public Country toCountries() {
     Region region = new Region();

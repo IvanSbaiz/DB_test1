@@ -1,7 +1,6 @@
 package it.test1.HR.service.impl;
 
 import it.test1.HR.data.model.Country;
-import it.test1.HR.data.model.Location;
 import it.test1.HR.data.model.Region;
 import it.test1.HR.data.response.GenericResponse;
 import it.test1.HR.repository.CountryRepository;
@@ -10,7 +9,6 @@ import it.test1.HR.repository.RegionRepository;
 import it.test1.HR.service.CountryService;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +40,8 @@ public class CountryImpl implements CountryService {
     return countryRepository.findAll();
   }
 
+
+
   /* @Override
   public Country save(Country country) {
     return countryRepository.save(country);
@@ -51,7 +51,7 @@ public class CountryImpl implements CountryService {
 
 
   @Override
-  public GenericResponse insert(Country country) {
+  public GenericResponse saved(Country country) {
 
     GenericResponse response = new GenericResponse();
 
@@ -63,7 +63,7 @@ public class CountryImpl implements CountryService {
       Country countrySaved = countryRepository.save(country);
       response.setBody(countrySaved.toDto());
       response.setStatusCode(HttpStatus.CREATED);
-      response.setMessage("Country inserted");
+      response.setMessage("Country saved");
 
     } else {
       response.setStatusCode(HttpStatus.NOT_FOUND);

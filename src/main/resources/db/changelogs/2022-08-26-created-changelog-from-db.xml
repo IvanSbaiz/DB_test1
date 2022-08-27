@@ -7,7 +7,7 @@
   objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
   <changeSet id="1661510797311-1" author="Ivan (generated)">
     <createTable tableName="countries">
-      <column name="country_id" type="CHAR(2)">
+      <column name="country_id" type="VARCHAR(2)">
         <constraints nullable="false" primaryKey="true"/>
       </column>
       <column name="country_name" type="VARCHAR(40)"/>
@@ -95,7 +95,7 @@
         <constraints nullable="false"/>
       </column>
       <column name="state_province" type="VARCHAR(25)"/>
-      <column name="country_id" type="CHAR(2)">
+      <column name="country_id" type="VARCHAR(2)">
         <constraints nullable="false"/>
       </column>
     </createTable>

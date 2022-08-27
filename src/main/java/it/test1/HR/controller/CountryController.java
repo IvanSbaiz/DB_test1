@@ -7,6 +7,7 @@ import it.test1.HR.data.response.GenericResponse;
 import it.test1.HR.service.CountryService;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,14 +35,19 @@ public class CountryController {
   }
 
   @GetMapping("/{id}")
-  public Country get(@PathVariable String idCountry) {
-    return countryService.getById(idCountry);
+  public Country get(@PathVariable String id) {
+    return countryService.getById(id);
 
   }
 
   @PostMapping
-  public GenericResponse insert(@RequestBody CountryInsertRequest request) {
-    return countryService.insert(request.toCountries());
+  public GenericResponse save(@RequestBody CountryInsertRequest request) {
+    return countryService.saved(request.toCountries());
+  }
+
+  @DeleteMapping("/{id}")
+  public Country deleteByID(@PathVariable String id) {
+    return countryService.getById(id);
   }
 
 }

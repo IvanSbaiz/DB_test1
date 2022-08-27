@@ -12,7 +12,7 @@ public interface CountryService {
 
   //public Country save(Country country);
 
-  public GenericResponse insert(Country country);
+  GenericResponse saved(Country country);
 
   public GenericResponse update(Country country);
 
