@@ -8,7 +8,7 @@
   <changeSet id="1661510797311-1" author="Ivan (generated)">
     <createTable tableName="countries">
       <column name="country_id" type="VARCHAR(2)">
-        <constraints nullable="false" primaryKey="true"/>
+        <constraints  nullable="false" primaryKey="true"/>
       </column>
       <column name="country_name" type="VARCHAR(40)"/>
       <column name="region_id" type="INT">

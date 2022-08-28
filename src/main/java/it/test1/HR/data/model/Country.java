@@ -1,5 +1,6 @@
 package it.test1.HR.data.model;
 
+import com.sun.istack.NotNull;
 import it.test1.HR.data.archetype.Dto;
 import it.test1.HR.data.archetype.Model;
 import it.test1.HR.data.dto.CountryDto;
