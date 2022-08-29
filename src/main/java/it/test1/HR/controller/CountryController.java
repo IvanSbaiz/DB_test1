@@ -46,8 +46,8 @@ public class CountryController {
   }
 
   @DeleteMapping("/{id}")
-  public Country deleteByID(@PathVariable String id) {
-    return countryService.getById(id);
+  public GenericResponse deleteByID(@PathVariable String id) {
+    return countryService.deleteById(id);
   }
 
 }

@@ -34,7 +34,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Country implements Model {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  //@GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "country_id", nullable = false, length = 2)
   private String id;
 
