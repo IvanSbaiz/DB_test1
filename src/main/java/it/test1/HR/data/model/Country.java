@@ -1,5 +1,6 @@
 package it.test1.HR.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import it.test1.HR.data.archetype.Dto;
 import it.test1.HR.data.archetype.Model;
@@ -34,7 +35,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Country implements Model {
 
   @Id
-  //@GeneratedValue(strategy = GenerationType.IDENTITY)
+  //@GeneratedValue(strategy = GenerationType.IDENTITY) --> Solo per integers
   @Column(name = "country_id", nullable = false, length = 2)
   private String id;
 
@@ -44,6 +45,7 @@ public class Country implements Model {
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "region_id", nullable = false)
+  @JsonIgnore
   private Region region;
 
   @OneToMany(mappedBy = "country")

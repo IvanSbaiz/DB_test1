@@ -35,17 +35,13 @@ public class CountryImpl implements CountryService {
     return null;
   }
 
+
   @Override
   public List<Country> getAll() {
     return countryRepository.findAll();
   }
 
 
-
-  /* @Override
-  public Country save(Country country) {
-    return countryRepository.save(country);
-  } */
 
 
 
@@ -81,16 +77,24 @@ public class CountryImpl implements CountryService {
 
     if (countryRepository.findById(country.getId()).isPresent()) {
 
-      response.setStatusCode(HttpStatus.OK);
-      response.setMessage("Country updated");
+      Optional<Region> region = regionRepository.findById(country.getRegion().getId());
+      if (region.isPresent()) {
 
-    } else {
-      response.setStatusCode(HttpStatus.NOT_FOUND);
-      response.setMessage("Error update. Country not found");
+        country.setRegion(region.get());
+        response.setBody(countryRepository.save(country).toDto());
+        response.setStatusCode(HttpStatus.OK);
+        response.setMessage("Country updated");
+
+      } else {
+        response.setStatusCode(HttpStatus.NOT_FOUND);
+        response.setMessage("Error update. Country not found");
+      }
     }
 
-    return response;
-  }
+      return response;
+    }
+
+
 
   @Override
   public GenericResponse deleteById(String id) {

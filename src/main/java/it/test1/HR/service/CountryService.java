@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CountryService {
 
-  Country getById(String id);
+  public Country getById(String id);
 
   public List<Country> getAll();
 
